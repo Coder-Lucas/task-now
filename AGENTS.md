@@ -9,7 +9,7 @@ SharpNote is a Next.js 16 PWA application for Markdown note-taking with local-fi
 ## Environment Requirements
 
 - **Node.js**: 22.15.1
-- **pnpm**: 8.15.9
+- **pnpm**: 10.29.2
 - **TypeScript**: 5.9.3
 - **ESLint**: 9.39.2
 - **Prettier**: 3.8.1
@@ -17,7 +17,7 @@ SharpNote is a Next.js 16 PWA application for Markdown note-taking with local-fi
 ## Build Commands
 
 ```bash
-# Install dependencies (requires pnpm 8.15.9)
+# Install dependencies (requires pnpm 10.29.2)
 pnpm i
 
 # Start development server
@@ -60,16 +60,16 @@ Organize imports in the following order:
 4. Path aliases for internal modules
 
 ```typescript
-// React imports (named)
-import { FC, ReactNode } from "react";
+// React imports (named with type keyword for type-only imports)
+import { type ReactNode } from "react";
 
 // Next.js imports (mixed)
-import { Metadata, Viewport } from "next";
+import { type Metadata, type Viewport } from "next";
 import Image from "next/image";
 import Link from "next/link";
 
 // Third-party libraries (default + named)
-import Dexie, { Table } from "dexie";
+import Dexie, { type Table } from "dexie";
 import { HiOutlineCheckCircle } from "react-icons/hi";
 
 // Path aliases for internal modules
@@ -99,6 +99,7 @@ Configure imports using these aliases defined in `tsconfig.json`:
         readonly name: string;
         readonly text: string;
         readonly time: string;
+        readonly deletedAt: string | null;
     };
     type TRootLayoutProps = {
         readonly children: ReactNode;
@@ -108,19 +109,19 @@ Configure imports using these aliases defined in `tsconfig.json`:
     ```typescript
     type TItemProps = Readonly<{
         readonly children?: ReactNode;
-        readonly href: string;
+        readonly href?: string;
     }>;
     ```
-- Use `FC<T>` for component types:
+- Component functions can use implicit typing or explicit props type:
     ```typescript
-    const Header: FC = () => { ... };
-    const Item: FC<TItemProps> = ({ children, href }) => { ... };
+    const Header = () => { ... };
+    const Item = ({ children = null, href = "about:blank" }: TItemProps) => { ... };
     ```
 - Use explicit return types for database functions:
     ```typescript
-    const createNote: ({ name, text }: TNote) => Promise<undefined> = async ({ name, text }) => {
+    const createNote: ({ name, text }: Pick<TNote, "name" | "text">) => Promise<TNote | undefined> = async ({ name, text }) => {
         // implementation
-        return undefined;
+        return note;
     };
     ```
 
@@ -139,14 +140,17 @@ Configure imports using these aliases defined in `tsconfig.json`:
 **ESLint Configuration** (`eslint.config.js`):
 
 ```javascript
-import Config from "eslint-config-next";
+import Vitals from "eslint-config-next/core-web-vitals";
+import Typescript from "eslint-config-next/typescript";
+import Prettier from "eslint-config-prettier/flat";
 import { defineConfig } from "eslint/config";
 
-const config = defineConfig([...Config]);
+const config = defineConfig([...Vitals, ...Typescript, Prettier]);
+
 export default config;
 ```
 
-- Extends `eslint-config-next` with default Next.js rules
+- Extends `eslint-config-next/core-web-vitals`, `eslint-config-next/typescript`, and `eslint-config-prettier/flat`
 - Run `pnpm lint` to check code quality
 
 **Prettier Configuration** (`prettier.config.js`):
@@ -160,7 +164,7 @@ const config = {
     htmlWhitespaceSensitivity: "ignore",
     jsxSingleQuote: false,
     objectWrap: "preserve",
-    plugins: ["prettier-plugin-tailwindcss"],
+    plugins: ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
     printWidth: Infinity,
     semi: true,
     singleAttributePerLine: false,
@@ -171,16 +175,22 @@ const config = {
 export default config;
 ```
 
+- Uses `prettier-plugin-organize-imports` for import organization
+- Uses `prettier-plugin-tailwindcss` for Tailwind class sorting
 - Run `pnpm format` before committing to auto-format code
 - Run `pnpm check` to validate formatting
 
 ### Components & React Patterns
 
 - Use `"use client"` directive for client-side components
-- Use `FC<T>` for functional component typing
+- Component functions can use implicit typing or explicit props type:
+    ```typescript
+    const Footer = () => { ... };
+    const Button = ({ children = null, onClick = () => {} }: TButtonProps) => { ... };
+    ```
 - Destructure props with default values when appropriate:
     ```typescript
-    const Item: FC<TItemProps> = ({ children = null, href }) => { ... };
+    const Item = ({ children = null, href = "about:blank" }: TItemProps) => { ... };
     ```
 - Use `ReactNode` for children that accept any valid React content
 - Use default exports for components:
@@ -193,7 +203,7 @@ export default config;
     export { metadata, viewport };
     ```
 - Special components use prefixes: `NextError`, `NextLoading`, `RootLayout`
-- Page components use PascalCase naming (e.g., `Index`, `Manifest`)
+- Page components use PascalCase naming (e.g., `Index`, `Manifest`, `Fn`)
 - Database functions use explicit return types
 
 ### Error Handling
@@ -216,7 +226,7 @@ Database initialization with error handling:
 async init() {
     try {
         this.version(1).stores({
-            notes: "id, name, text, time"
+            notes: "id, name, text, time, deletedAt"
         });
         await this.open();
     } catch (e) {
@@ -303,14 +313,14 @@ class SharpNoteDB extends Dexie {
     }
 
     constructor() {
-        super(SharpNoteDB.name);
+        super("SharpNoteDB");
         return this;
     }
 
     async init() {
         try {
             this.version(1).stores({
-                notes: "id, name, text, time"
+                notes: "id, name, text, time, deletedAt"
             });
             await this.open();
         } catch (e) {
@@ -373,9 +383,9 @@ const viewport: Viewport = {
 ```typescript
 "use client";
 
-import { FC } from "react";
+import { type ReactNode } from "react";
 
-const Footer: FC = () => {
+const Footer = () => {
     return (
         <footer className="mt-32 flex h-24 w-full items-center justify-center bg-indigo-700 dark:bg-indigo-300">
             <small className="text-sm text-zinc-50 dark:text-zinc-950">Copyright © 2025-2026 Lucas</small>
@@ -389,16 +399,18 @@ export default Footer;
 **Component with Props:**
 
 ```typescript
-import { FC, ReactNode } from "react";
+"use client";
+
+import { type ReactNode } from "react";
 
 type TButtonProps = {
     readonly children?: ReactNode;
-    readonly onClick: () => unknown;
+    readonly onClick?: () => unknown;
 };
 
-const Button: FC<TButtonProps> = ({ children = null, onClick }) => {
+const Button = ({ children = null, onClick = () => {} }: TButtonProps) => {
     return (
-        <button className="rounded-lg bg-indigo-700 dark:bg-indigo-300 px-8 py-4 text-lg text-zinc-50 dark:text-zinc-950" onClick={onClick} type="button">
+        <button className="rounded-lg border border-zinc-300 px-8 py-4 transition-colors hover:border-zinc-500 hover:bg-zinc-300 dark:border-zinc-700 dark:text-indigo-300 dark:hover:bg-zinc-700" onClick={onClick} type="button">
             {children}
         </button>
     );
@@ -412,15 +424,15 @@ export default Button;
 ```typescript
 "use client";
 
-import { FC, ReactNode } from "react";
+import { type ReactNode } from "react";
 import Link from "next/link";
 
 type TItemProps = {
     readonly children?: ReactNode;
-    readonly href: string;
+    readonly href?: string;
 };
 
-const Item: FC<TItemProps> = ({ children = null, href }) => {
+const Item = ({ children = null, href = "about:blank" }: TItemProps) => {
     return (
         <li className="h-16 w-auto">
             <Link href={href} prefetch={true}>{children}</Link>

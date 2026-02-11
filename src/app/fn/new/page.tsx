@@ -1,10 +1,10 @@
 "use client";
 
+import MarkdownEditor from "#/markdown-editor.tsx";
+import { createNote } from "@lib/db.ts";
 import { useRouter } from "next/navigation";
 import { FC, useState } from "react";
 import { HiArrowLeft, HiCheck } from "react-icons/hi2";
-import { createNote } from "@lib/db.ts";
-import MarkdownEditor from "#/markdown-editor.tsx";
 
 const NewNotePage: FC = () => {
     const router = useRouter();
@@ -43,10 +43,9 @@ const NewNotePage: FC = () => {
     };
 
     return (
-        <main className="mt-8 flow-root min-h-screen px-4 pb-24">
+        <main className="mt-8 min-h-screen px-4 pb-24">
             <div className="mx-auto max-w-6xl">
-                {/* 顶部导航栏 */}
-                <div className="mb-6 flex items-center justify-between">
+                <header className="mb-6 flex items-center justify-between">
                     <button onClick={handleBack} className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">
                         <HiArrowLeft size="18" />
                         返回
@@ -55,17 +54,15 @@ const NewNotePage: FC = () => {
                         <HiCheck size="18" />
                         {isSaving ? "保存中..." : "保存"}
                     </button>
-                </div>
+                </header>
 
-                {/* 标题输入 */}
-                <div className="mb-6">
+                <section className="mb-6">
                     <input type="text" className="w-full rounded-lg bg-zinc-100 p-4 text-2xl font-bold text-zinc-900 placeholder-zinc-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:bg-zinc-900 dark:text-zinc-50" placeholder="笔记标题..." value={title} onChange={(e) => setTitle(e.target.value)} />
-                </div>
+                </section>
 
-                {/* Markdown 编辑器 */}
-                <div className="h-[calc(100vh-250px)] min-h-[400px]">
-                    <MarkdownEditor initialContent={content} onSave={setContent} />
-                </div>
+                <section className="h-[calc(100vh-250px)] min-h-[400px]">
+                    <MarkdownEditor initialContent={content} />
+                </section>
             </div>
         </main>
     );

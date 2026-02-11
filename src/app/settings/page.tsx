@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-const Settings: FC = () => {
+const Settings = () => {
     return <main />;
 };
 

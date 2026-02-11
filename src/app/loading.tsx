@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-const NextLoading: FC = () => {
+const NextLoading = () => {
     return <main />;
 };
 

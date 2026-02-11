@@ -6,7 +6,7 @@ const config = {
     htmlWhitespaceSensitivity: "ignore",
     jsxSingleQuote: false,
     objectWrap: "preserve",
-    plugins: ["prettier-plugin-tailwindcss"],
+    plugins: ["prettier-plugin-organize-imports", "prettier-plugin-tailwindcss"],
     printWidth: Infinity,
     semi: true,
     singleAttributePerLine: false,

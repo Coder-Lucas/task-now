@@ -1,6 +1,6 @@
 "use client";
 
-import { FC, useState } from "react";
+import { useState } from "react";
 import { HiMagnifyingGlass } from "react-icons/hi2";
 
 type TSearchInputProps = {
@@ -8,7 +8,7 @@ type TSearchInputProps = {
     readonly placeholder?: string;
 };
 
-const SearchInput: FC<TSearchInputProps> = ({ onSearch, placeholder = "搜索笔记..." }) => {
+const SearchInput = ({ onSearch, placeholder = "搜索笔记..." }: TSearchInputProps) => {
     const [query, setQuery] = useState("");
 
     const handleChange = (value: string) => {

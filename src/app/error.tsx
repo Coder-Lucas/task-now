@@ -1,18 +1,18 @@
 "use client";
 
-import { FC } from "react";
-
 type TNextErrorProps = {
     readonly error: Error;
     readonly reset: () => unknown;
 };
 
-const NextError: FC<TNextErrorProps> = ({ error, reset }) => {
+const NextError = ({ error, reset }: TNextErrorProps) => {
     return (
         <main>
             <h1>出现了未知错误</h1>
             <p>{error.message}</p>
-            <button onClick={reset}>重试</button>
+            <button onClick={reset} type="button">
+                重试
+            </button>
         </main>
     );
 };

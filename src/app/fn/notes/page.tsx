@@ -1,8 +1,7 @@
 import { permanentRedirect } from "next/navigation";
-import { FC } from "react";
 
-const Notes: FC = () => {
+const RedirectToFn = () => {
     permanentRedirect("/fn");
 };
 
-export default Notes;
+export default RedirectToFn;

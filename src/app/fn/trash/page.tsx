@@ -1,18 +1,14 @@
 "use client";
 
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { FC } from "react";
-import { HiArrowLeft, HiArrowUturnLeft, HiTrash } from "react-icons/hi2";
+import { permanentlyDeleteNote, restoreNote, retrieveDeletedNotes, type TNote } from "@lib/db.ts";
 import { useLiveQuery } from "dexie-react-hooks";
-import { permanentlyDeleteNote, restoreNote, retrieveDeletedNotes, TNote } from "@lib/db.ts";
+import { useRouter } from "next/navigation";
+import { HiArrowLeft, HiArrowUturnLeft, HiTrash } from "react-icons/hi2";
 
-const DeletedNoteCard: FC<{ readonly note: TNote }> = ({ note }) => {
-    const router = useRouter();
-
+const DeletedNoteCard = ({ note }: { readonly note: TNote }) => {
     const formatTime = (isoString: string) => {
         const date = new Date(isoString);
-        return date.toLocaleString("zh-CN", {
+        return date.toLocaleString("zh-Hans-CN", {
             year: "numeric",
             month: "2-digit",
             day: "2-digit",
@@ -81,7 +77,7 @@ const DeletedNoteCard: FC<{ readonly note: TNote }> = ({ note }) => {
     );
 };
 
-const EmptyTrashState: FC = () => {
+const EmptyTrashState = () => {
     return (
         <div className="flex flex-col items-center justify-center py-16 text-center">
             <div className="mb-4 rounded-full bg-zinc-100 p-6 dark:bg-zinc-900">
@@ -93,7 +89,7 @@ const EmptyTrashState: FC = () => {
     );
 };
 
-const TrashPage: FC = () => {
+const Trash = () => {
     const router = useRouter();
 
     const deletedNotes = useLiveQuery(async () => {
@@ -133,9 +129,9 @@ const TrashPage: FC = () => {
     };
 
     return (
-        <main className="mt-8 flow-root min-h-screen px-4 pb-24">
+        <main className="mt-8 min-h-screen px-4 pb-24">
             <div className="mx-auto max-w-6xl">
-                <div className="mb-8 flex items-center gap-4">
+                <header className="mb-8 flex items-center gap-4">
                     <button onClick={handleBack} className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">
                         <HiArrowLeft size="18" />
                         返回
@@ -144,7 +140,7 @@ const TrashPage: FC = () => {
                         <h1 className="text-2xl font-bold text-zinc-900 dark:text-zinc-50">回收站</h1>
                         <p className="text-sm text-zinc-500 dark:text-zinc-400">笔记将在 30 天后自动清空</p>
                     </div>
-                </div>
+                </header>
 
                 {renderNotes()}
             </div>
@@ -152,4 +148,4 @@ const TrashPage: FC = () => {
     );
 };
 
-export default TrashPage;
+export default Trash;

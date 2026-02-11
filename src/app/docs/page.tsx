@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-const Docs: FC = () => {
+const Docs = () => {
     return <main />;
 };
 

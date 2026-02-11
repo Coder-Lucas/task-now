@@ -1,8 +1,6 @@
-import { MetadataRoute } from "next";
+import { type MetadataRoute } from "next";
 
-type TRobots = () => MetadataRoute.Robots;
-
-const Robots: TRobots = () => {
+const Robots = (): MetadataRoute.Robots => {
     return {
         host: "https://shnt.netlify.app",
         rules: {

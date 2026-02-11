@@ -1,9 +1,7 @@
 "use client";
 
-import { FC } from "react";
-
-const NoteList: FC = () => {
-    return <main />;
+const NoteList = () => {
+    return null;
 };
 
 export default NoteList;

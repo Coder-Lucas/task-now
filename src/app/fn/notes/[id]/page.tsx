@@ -1,17 +1,17 @@
 "use client";
 
-import { notFound, useRouter } from "next/navigation";
-import { FC, useEffect, useState } from "react";
-import { HiArrowLeft, HiCheck, HiPencil, HiTrash } from "react-icons/hi2";
-import { retrieveNote, softDeleteNote, TNote, updateNote } from "@lib/db.ts";
 import MarkdownEditor from "#/markdown-editor.tsx";
 import MarkdownViewer from "#/markdown-viewer.tsx";
+import { retrieveNote, softDeleteNote, TNote, updateNote } from "@lib/db.ts";
+import { notFound, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
+import { HiArrowLeft, HiCheck, HiPencil, HiTrash } from "react-icons/hi2";
 
 type TNoteDetailPageProps = {
     readonly params: Promise<{ readonly id: string }>;
 };
 
-const NoteDetailPage: FC<TNoteDetailPageProps> = ({ params }) => {
+const Note = ({ params }: TNoteDetailPageProps) => {
     const router = useRouter();
     const [id, setId] = useState<string>("");
     const [note, setNote] = useState<TNote | null>(null);
@@ -47,7 +47,7 @@ const NoteDetailPage: FC<TNoteDetailPageProps> = ({ params }) => {
             }
         };
 
-        loadNote();
+        loadNote().then();
     }, [id]);
 
     // 处理保存编辑
@@ -122,11 +122,9 @@ const NoteDetailPage: FC<TNoteDetailPageProps> = ({ params }) => {
     if (isLoading) {
         return (
             <main className="mt-8 flow-root min-h-screen px-4 pb-24">
-                <div className="mx-auto max-w-4xl">
-                    <div className="animate-pulse space-y-6">
-                        <div className="h-8 w-3/4 rounded bg-zinc-200 dark:bg-zinc-800" />
-                        <div className="h-96 rounded bg-zinc-200 dark:bg-zinc-800" />
-                    </div>
+                <div className="mx-auto max-w-4xl animate-pulse space-y-6">
+                    <div className="h-8 w-3/4 rounded bg-zinc-200 dark:bg-zinc-800" />
+                    <div className="h-96 rounded bg-zinc-200 dark:bg-zinc-800" />
                 </div>
             </main>
         );
@@ -138,10 +136,9 @@ const NoteDetailPage: FC<TNoteDetailPageProps> = ({ params }) => {
     }
 
     return (
-        <main className="mt-8 flow-root min-h-screen px-4 pb-24">
+        <main className="mt-8 min-h-screen px-4 pb-24">
             <div className="mx-auto max-w-6xl">
-                {/* 顶部导航栏 */}
-                <div className="mb-6 flex items-center justify-between">
+                <header className="mb-6 flex items-center justify-between">
                     <button onClick={handleBack} className="inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-zinc-700 transition-colors hover:bg-zinc-100 dark:text-zinc-300 dark:hover:bg-zinc-800">
                         <HiArrowLeft size="18" />
                         返回
@@ -169,28 +166,26 @@ const NoteDetailPage: FC<TNoteDetailPageProps> = ({ params }) => {
                             </button>
                         </div>
                     )}
-                </div>
+                </header>
 
-                {/* 笔记标题 */}
                 {!isEditing ? (
-                    <div className="mb-6">
+                    <section className="mb-6">
                         <h1 className="text-3xl font-bold text-zinc-900 dark:text-zinc-50">{note.name}</h1>
                         <p className="mt-2 text-sm text-zinc-500 dark:text-zinc-400">最后修改: {formatTime(note.time)}</p>
-                    </div>
+                    </section>
                 ) : (
-                    <div className="mb-6">
+                    <section className="mb-6">
                         <input type="text" className="w-full rounded-lg bg-zinc-100 p-4 text-2xl font-bold text-zinc-900 placeholder-zinc-400 focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:bg-zinc-900 dark:text-zinc-50" value={editTitle} onChange={(e) => setEditTitle(e.target.value)} placeholder="笔记标题..." />
-                    </div>
+                    </section>
                 )}
 
-                {/* 内容区域 */}
                 {!isEditing ? (
                     <div className="rounded-lg border border-zinc-200 bg-white p-8 dark:border-zinc-800 dark:bg-zinc-950">
                         <MarkdownViewer content={note.text} />
                     </div>
                 ) : (
                     <div className="h-[calc(100vh-280px)] min-h-[400px]">
-                        <MarkdownEditor initialContent={editContent} onSave={setEditContent} />
+                        <MarkdownEditor initialContent={editContent} />
                     </div>
                 )}
             </div>
@@ -198,4 +193,4 @@ const NoteDetailPage: FC<TNoteDetailPageProps> = ({ params }) => {
     );
 };
 
-export default NoteDetailPage;
+export default Note;

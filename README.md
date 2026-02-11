@@ -1,7 +1,7 @@
 # SharpNote
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue?logo=github&style=flat-square)](https://github.com/Coder-Lucas/sharp-note.git)
-[![Netlify Website](https://img.shields.io/badge/Netlify-Website-blue?logo=netlify&style=flat-square)](https://shnt.netlify.app)
+[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue.svg?logo=github&style=flat-square)](https://github.com/Coder-Lucas/sharp-note.git)
+[![Netlify Website](https://img.shields.io/badge/Netlify-Website-blue.svg?logo=netlify&style=flat-square)](https://shnt.netlify.app)
 
 ## 中文
 
@@ -20,7 +20,7 @@
         5. [许可证](#许可证)
         6. [联系我们](#联系我们)
     2. [English](#english)
-        1. [Table of Contents](#table-of-contents)
+        1. [TOC](#toc)
         2. [Project Description](#project-description)
         3. [Get Started](#get-started)
         4. [Local Deployment](#local-deployment)
@@ -53,7 +53,7 @@
 # 推荐使用 nvm 管理 Node.js 版本
 nvm install 22.15.1
 nvm use 22.15.1
-npm i -g pnpm@8.15.9
+npm i -g pnpm@10.29.2
 ```
 
 #### 安装依赖
@@ -64,7 +64,7 @@ cd sharp-note
 pnpm i
 
 # 启动开发服务器
-pnpm run dev
+pnpm dev
 ```
 
 ### 许可证
@@ -81,7 +81,7 @@ pnpm run dev
 
 English Version of the **README** Doc.
 
-### Table of Contents
+### TOC
 
 1. [SharpNote](#sharpnote)
     1. [中文](#中文)
@@ -94,7 +94,7 @@ English Version of the **README** Doc.
         5. [许可证](#许可证)
         6. [联系我们](#联系我们)
     2. [English](#english)
-        1. [Table of Contents](#table-of-contents)
+        1. [TOC](#toc)
         2. [Project Description](#project-description)
         3. [Get Started](#get-started)
         4. [Local Deployment](#local-deployment)
@@ -113,7 +113,7 @@ Private & safe, local-first storage, **all data stored locally in your browser**
 
 ### Get Started
 
-**NO DOWNLOAD**, **NO SIGN-UP**.
+**NO DOWNLOAD**, **NO SIGNUP**.
 [Visit the official website](https://shnt.netlify.app)
 , and start using SharpNote now!
 
@@ -125,9 +125,9 @@ Let's walk you step-by-step through the local deployment of SharpNote.
 
 ```bash
 # We recommend using nvm to manage Node.js versions
-nvm i 22.15.1
+nvm install 22.15.1
 nvm use 22.15.1
-npm i -g pnpm@8.15.9
+npm i -g pnpm@10.29.2
 ```
 
 #### Install Dependencies

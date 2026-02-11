@@ -1,6 +1,4 @@
-import { FC } from "react";
-
-const NextNotFound: FC = () => {
+const NextNotFound = () => {
     return (
         <main>
             <h1>404</h1>

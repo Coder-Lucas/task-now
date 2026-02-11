@@ -1,8 +1,6 @@
-import { MetadataRoute } from "next";
+import { type MetadataRoute } from "next";
 
-type TSitemap = () => MetadataRoute.Sitemap;
-
-const Sitemap: TSitemap = () => {
+const Sitemap = (): MetadataRoute.Sitemap => {
     return [
         {
             lastModified: new Date(),

@@ -1,8 +1,9 @@
 import Footer from "#/footer.tsx";
 import Header from "#/header.tsx";
-import { Metadata, Viewport } from "next";
-import { ReactNode, FC } from "react";
 import "@styles/main.css";
+import "github-markdown-css/github-markdown.css";
+import { type Metadata, type Viewport } from "next";
+import { type ReactNode } from "react";
 
 type TRootLayoutProps = {
     readonly children: ReactNode;
@@ -19,7 +20,7 @@ const metadata: Metadata = {
     },
     applicationName: "SharpNote",
     category: "笔记应用",
-    classification: "在线Markdown笔记应用",
+    classification: "在线 Markdown 笔记应用",
     description: "SharpNote：你的 Markdown 专属写作空间。极简设计，操作直观，专注于写作本身。响应迅速，即开即用，捕捉每一个灵感瞬间。隐私安全，本地存储，所有数据全部存储于浏览器。完全开源，永久免费，开启你的写作之旅。",
     formatDetection: {
         address: false,
@@ -81,9 +82,10 @@ const viewport: Viewport = {
     themeColor: "oklch(98.5% 0 0)"
 };
 
-const RootLayout: FC<TRootLayoutProps> = ({ children }) => {
+const RootLayout = ({ children }: TRootLayoutProps) => {
     return (
         <html className="bg-zinc-50 text-base scheme-light-dark dark:bg-zinc-950" dir="ltr" lang="zh-Hans-CN">
+            <head />
             <body className="mt-16 flow-root font-serif text-zinc-950 dark:text-zinc-50">
                 <Header />
                 {children}

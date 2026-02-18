@@ -4,12 +4,17 @@ This document provides guidelines for agentic coding agents working in this repo
 
 ## Project Overview
 
-SharpNote is a Next.js 16 PWA application for Markdown note-taking with local-first storage (IndexedDB via Dexie). The project uses TypeScript, React 19, Tailwind CSS v4, and follows a component-based architecture.
+SharpNote is a Next.js 16 PWA application for Markdown note-taking with storage abstraction layer. The project uses TypeScript, React 19, Tailwind CSS v4, and follows a component-based architecture.
+
+**Storage Architecture:**
+
+- **Current**: IndexedDB via Dexie.js (`@lib/db.ts`)
+- **Storage Interface**: Future-ready interface (`INoteStorage`) allows easy backend replacement
 
 ## Environment Requirements
 
-- **Node.js**: 22.15.1
-- **pnpm**: 10.29.2
+- **Node.js**: 22.22.0
+- **pnpm**: 10.29.3
 - **TypeScript**: 5.9.3
 - **ESLint**: 9.39.2
 - **Prettier**: 3.8.1
@@ -17,7 +22,7 @@ SharpNote is a Next.js 16 PWA application for Markdown note-taking with local-fi
 ## Build Commands
 
 ```bash
-# Install dependencies (requires pnpm 10.29.2)
+# Install dependencies (requires pnpm 10.29.3)
 pnpm i
 
 # Start development server
@@ -102,13 +107,13 @@ Configure imports using these aliases defined in `tsconfig.json`:
         readonly deletedAt: string | null;
     };
     type TRootLayoutProps = {
-        readonly children: ReactNode;
+        readonly children: React.ReactNode;
     };
     ```
 - Use `Readonly<{}>` for component props when additional type safety is needed:
     ```typescript
     type TItemProps = Readonly<{
-        readonly children?: ReactNode;
+        readonly children?: React.ReactNode;
         readonly href?: string;
     }>;
     ```
@@ -124,6 +129,7 @@ Configure imports using these aliases defined in `tsconfig.json`:
         return note;
     };
     ```
+- Use `React.ReactNode` (global type) instead of importing `ReactNode` from react
 
 ### Naming Conventions
 
@@ -295,29 +301,34 @@ console.info("INFO: 数据库创建完成");
 console.error(`ERROR: ${e}`);
 ```
 
-### Database Patterns (Dexie.js)
+### Database Patterns
 
-- Extend `Dexie` class for database operations
-- Define tables using `Table<T, K, T>` generic types
-- Use `version().stores()` to define schema
-- Initialize with `async init()` method
-- Return `undefined` explicitly from init methods
-- Use static methods for utility functions like UUID generation
+SharpNote uses IndexedDB via Dexie.js for local-first data persistence.
+
+**Database Setup:**
 
 ```typescript
+import Dexie, { type Table } from "dexie";
+
+type TNote = {
+    readonly id: string;
+    readonly name: string;
+    readonly text: string;
+    readonly time: string;
+    readonly deletedAt: string | null;
+};
+
 class SharpNoteDB extends Dexie {
     notes: Table<TNote, string, TNote> = undefined!;
 
-    static uuid() {
-        return v7();
-    }
-
     constructor() {
         super("SharpNoteDB");
-        return this;
     }
 
     async init() {
+        if (typeof window === "undefined") {
+            throw new Error("数据库只能在浏览器环境中初始化");
+        }
         try {
             this.version(1).stores({
                 notes: "id, name, text, time, deletedAt"
@@ -327,16 +338,37 @@ class SharpNoteDB extends Dexie {
             console.error(`ERROR: ${e}`);
             throw e;
         }
-        return undefined;
     }
 }
-
-const db: SharpNoteDB = new SharpNoteDB();
-db.init().then();
-
-export { SharpNoteDB };
-export default db;
 ```
+
+**Database Functions:**
+
+```typescript
+import { createNote, retrieveNote, updateNote, type TNote } from "@lib/db.ts";
+
+const MyComponent = () => {
+    // CRUD operations
+    const handleCreate = async () => {
+        await createNote({ name: "New Note", text: "Content" });
+    };
+
+    // ...
+};
+```
+
+**Available Functions in `@lib/db.ts`:**
+
+- `createNote({ name, text })` - Create a new note
+- `retrieveNote(id)` - Get a note by ID
+- `retrieveNotes()` - Get all active notes
+- `retrieveDeletedNotes()` - Get all deleted notes (trash)
+- `updateNote(id, { name, text })` - Update a note
+- `softDeleteNote(id)` - Move a note to trash
+- `restoreNote(id)` - Restore a note from trash
+- `permanentlyDeleteNote(id)` - Permanently delete a note
+- `searchNotes(query)` - Search notes by name or content
+- `cleanExpiredNotes()` - Clean notes expired from trash (retention: 30 days)
 
 ### Metadata Configuration
 
@@ -383,8 +415,6 @@ const viewport: Viewport = {
 ```typescript
 "use client";
 
-import { type ReactNode } from "react";
-
 const Footer = () => {
     return (
         <footer className="mt-32 flex h-24 w-full items-center justify-center bg-indigo-700 dark:bg-indigo-300">
@@ -401,10 +431,8 @@ export default Footer;
 ```typescript
 "use client";
 
-import { type ReactNode } from "react";
-
 type TButtonProps = {
-    readonly children?: ReactNode;
+    readonly children?: React.ReactNode;
     readonly onClick?: () => unknown;
 };
 
@@ -424,11 +452,11 @@ export default Button;
 ```typescript
 "use client";
 
-import { type ReactNode } from "react";
+import Image from "next/image";
 import Link from "next/link";
 
 type TItemProps = {
-    readonly children?: ReactNode;
+    readonly children?: React.ReactNode;
     readonly href?: string;
 };
 

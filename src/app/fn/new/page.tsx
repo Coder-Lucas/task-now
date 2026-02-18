@@ -3,10 +3,10 @@
 import MarkdownEditor from "#/markdown-editor.tsx";
 import { createNote } from "@lib/db.ts";
 import { useRouter } from "next/navigation";
-import { FC, useState } from "react";
+import { useState } from "react";
 import { HiArrowLeft, HiCheck } from "react-icons/hi2";
 
-const NewNotePage: FC = () => {
+const NewNotePage = () => {
     const router = useRouter();
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");

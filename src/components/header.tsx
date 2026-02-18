@@ -2,11 +2,9 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { type ReactNode } from "react";
 import { HiOutlineCog, HiOutlineDocumentText, HiOutlineHome, HiOutlineInformationCircle } from "react-icons/hi";
-
 type TItemProps = {
-    readonly children?: ReactNode;
+    readonly children?: React.ReactNode;
     readonly href?: string;
 };
 

@@ -18,7 +18,7 @@ const SearchInput = ({ onSearch, placeholder = "搜索笔记..." }: TSearchInput
 
     return (
         <div className="relative w-full">
-            <HiMagnifyingGlass className="absolute top-1/2 left-4 -translate-y-1/2 text-zinc-400" size="20" />
+            <HiMagnifyingGlass className="absolute top-1/2 left-4 -translate-y-1/2 text-zinc-400" size="24" />
             <input type="text" className="w-full rounded-lg border border-zinc-200 bg-zinc-100 py-3 pr-4 pl-12 transition-all focus:ring-2 focus:ring-indigo-500 focus:outline-none dark:border-zinc-800 dark:bg-zinc-900" placeholder={placeholder} value={query} onChange={(e) => handleChange(e.target.value)} />
         </div>
     );

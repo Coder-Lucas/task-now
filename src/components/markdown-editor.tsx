@@ -1,7 +1,7 @@
 "use client";
 
+import MarkdownViewer from "#/markdown-viewer.tsx";
 import { useState } from "react";
-import MarkdownViewer from "./markdown-viewer";
 
 type TMarkdownEditorProps = {
     readonly initialContent?: string;

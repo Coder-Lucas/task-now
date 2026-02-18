@@ -3,10 +3,9 @@ import Header from "#/header.tsx";
 import "@styles/main.css";
 import "github-markdown-css/github-markdown.css";
 import { type Metadata, type Viewport } from "next";
-import { type ReactNode } from "react";
 
 type TRootLayoutProps = {
-    readonly children: ReactNode;
+    readonly children: React.ReactNode;
 };
 
 const metadata: Metadata = {

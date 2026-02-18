@@ -2,10 +2,10 @@
 
 import MarkdownEditor from "#/markdown-editor.tsx";
 import MarkdownViewer from "#/markdown-viewer.tsx";
-import { retrieveNote, softDeleteNote, TNote, updateNote } from "@lib/db.ts";
+import { retrieveNote, softDeleteNote, type TNote, updateNote } from "@lib/db.ts";
 import { notFound, useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { HiArrowLeft, HiCheck, HiPencil, HiTrash } from "react-icons/hi2";
+import { HiArrowLeft, HiCheck, HiPencil, HiTrash } from "react-icons/hi";
 
 type TNoteDetailPageProps = {
     readonly params: Promise<{ readonly id: string }>;

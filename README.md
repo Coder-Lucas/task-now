@@ -15,19 +15,13 @@
         2. [项目描述](#项目描述)
         3. [立即开始](#立即开始)
         4. [本地部署](#本地部署)
-            1. [环境准备](#环境准备)
-            2. [安装依赖](#安装依赖)
+            1. [使用 Docker](#使用-docker)
+            2. [使用 nvm](#使用-nvm)
+            3. [使用 Node.js v22.22.0](#使用-nodejs-v22220)
         5. [许可证](#许可证)
         6. [联系我们](#联系我们)
     2. [English](#english)
-        1. [TOC](#toc)
-        2. [Project Description](#project-description)
-        3. [Get Started](#get-started)
-        4. [Local Deployment](#local-deployment)
-            1. [Env Setup](#env-setup)
-            2. [Install Dependencies](#install-dependencies)
-        5. [License](#license)
-        6. [Contact Us](#contact-us)
+        1. ...
 
 ### 项目描述
 
@@ -47,24 +41,70 @@
 
 让我们教你一步步完成 **SharpNote** 的本地部署。
 
-#### 环境准备
+#### 使用 Docker
 
 ```bash
-# 推荐使用 nvm 管理 Node.js 版本
-nvm install 22.15.1
-nvm use 22.15.1
-npm i -g pnpm@10.29.2
+# 克隆项目代码
+git clone https://github.com/Coder-Lucas/sharp-note.git
+
+# 进入项目目录
+cd sharp-note
+
+# 使用 Dockerfile 构建镜像
+docker build -t sharp-note .
+
+# 将容器的 3000 端口映射到本机的 3000 端口
+docker run -d -p 3000:3000 sharp-note
 ```
 
-#### 安装依赖
+#### 使用 nvm
 
 ```bash
+# 安装 Node.js v22.22.0
+nvm install 22.22.0
+
+# 切换到 Node.js v22.22.0
+nvm use 22.22.0
+
+# 全局安装 pnpm v10.29.3
+npm i -g pnpm@10.29.3
+
+# 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
+
+# 进入项目目录
 cd sharp-note
+
+# 安装项目依赖
 pnpm i
 
-# 启动开发服务器
-pnpm dev
+# 构建生产环境
+pnpm build
+
+# 启动生产服务器
+pnpm start
+```
+
+#### 使用 Node.js v22.22.0
+
+```bash
+# 全局安装 pnpm v10.29.3
+npm i -g pnpm@10.29.3
+
+# 克隆项目代码
+git clone https://github.com/Coder-Lucas/sharp-note.git
+
+# 进入项目目录
+cd sharp-note
+
+# 安装项目依赖
+pnpm i
+
+# 构建生产环境
+pnpm build
+
+# 启动生产服务器
+pnpm start
 ```
 
 ### 许可证
@@ -85,21 +125,15 @@ English Version of the **README** Doc.
 
 1. [SharpNote](#sharpnote)
     1. [中文](#中文)
-        1. [目录](#项目目录)
-        2. [项目描述](#项目描述)
-        3. [立即开始](#立即开始)
-        4. [本地部署](#本地部署)
-            1. [环境准备](#环境准备)
-            2. [安装依赖](#安装依赖)
-        5. [许可证](#许可证)
-        6. [联系我们](#联系我们)
+        1. ...
     2. [English](#english)
         1. [TOC](#toc)
         2. [Project Description](#project-description)
         3. [Get Started](#get-started)
         4. [Local Deployment](#local-deployment)
-            1. [Env Setup](#env-setup)
-            2. [Install Dependencies](#install-dependencies)
+            1. [Use Docker](#use-docker)
+            2. [Use nvm](#use-nvm)
+            3. [Use Node.js v22.22.0](#use-nodejs-v22220)
         5. [License](#license)
         6. [Contact Us](#contact-us)
 
@@ -109,36 +143,82 @@ English Version of the **README** Doc.
 Minimalist design, intuitive operation, **keep your focus solely on writing itself**.
 Blazing-fast response, instant access, **never miss a spark of inspiration**.
 Private & safe, local-first storage, **all data stored locally in your browser**.
-100% open-source, permanently free, **start your writing journey now**.
+100% open-source, permanently free, **start your writing journey today**.
 
 ### Get Started
 
 **NO DOWNLOAD**, **NO SIGNUP**.
 [Visit the official website](https://shnt.netlify.app)
-, and start using SharpNote now!
+, and start using SharpNote today!
 
 ### Local Deployment
 
 Let's walk you step-by-step through the local deployment of SharpNote.
 
-#### Env Setup
+#### Use Docker
 
 ```bash
-# We recommend using nvm to manage Node.js versions
-nvm install 22.15.1
-nvm use 22.15.1
-npm i -g pnpm@10.29.2
+# Clone the repo
+git clone https://github.com/Coder-Lucas/sharp-note.git
+
+# Enter the project dir
+cd sharp-note
+
+# Build the image using Dockerfile
+docker build -t sharp-note .
+
+# Map container port 3000 to host port 3000
+docker run -d -p 3000:3000 sharp-note
 ```
 
-#### Install Dependencies
+#### Use nvm
 
 ```bash
+# Install Node.js v22.22.0
+nvm install 22.22.0
+
+# Switch to Node.js v22.22.0
+nvm use 22.22.0
+
+# Globally install pnpm v10.29.3
+npm i -g pnpm@10.29.3
+
+# Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git
+
+# Enter the project dir
 cd sharp-note
+
+# Install project dependencies
 pnpm i
 
-# Launch the dev server
-pnpm dev
+# Build for production
+pnpm build
+
+# Start the production server
+pnpm start
+```
+
+#### use Node.js v22.22.0
+
+```bash
+# Globally install pnpm v10.29.3
+npm i -g pnpm@10.29.3
+
+# Clone the repo
+git clone https://github.com/Coder-Lucas/sharp-note.git
+
+# Enter the project dir
+cd sharp-note
+
+# Install project dependencies
+pnpm i
+
+# Build for production
+pnpm build
+
+# Start the production server
+pnpm start
 ```
 
 ### License

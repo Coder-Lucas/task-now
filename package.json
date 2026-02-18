@@ -1,5 +1,5 @@
 {
-    "$schema": "https://www.schemastore.org/package.json",
+    "$schema": "https://json.schemastore.org/package.json",
     "dependencies": {
         "dexie": "4.2.1",
         "dexie-react-hooks": "4.2.0",
@@ -15,9 +15,10 @@
     },
     "devDependencies": {
         "@tailwindcss/postcss": "4.1.18",
-        "@types/node": "22.15.35",
-        "@types/react": "19.2.13",
+        "@types/node": "22.19.11",
+        "@types/react": "19.2.14",
         "@types/react-dom": "19.2.3",
+        "babel-plugin-react-compiler": "1.0.0",
         "eslint": "9.39.2",
         "eslint-config-next": "16.1.6",
         "eslint-config-prettier": "10.1.8",
@@ -29,18 +30,18 @@
         "typescript": "5.9.3"
     },
     "engines": {
-        "node": "22.15.1",
-        "pnpm": "10.29.2"
+        "node": "22.22.0",
+        "pnpm": "10.29.3"
     },
     "name": "sharp-note",
-    "packageManager": "pnpm@10.29.2",
+    "packageManager": "pnpm@10.29.3",
     "private": true,
     "scripts": {
         "build": "next build",
-        "check": "prettier . -c --config prettier.config.js --ignore-path .gitignore",
+        "check": "prettier . -c",
         "dev": "next",
-        "format": "prettier . --config prettier.config.js --ignore-path .gitignore -w",
-        "lint": "eslint . --config eslint.config.js",
+        "format": "prettier . -w",
+        "lint": "eslint .",
         "start": "next start",
         "type": "tsc"
     },

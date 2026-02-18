@@ -65,7 +65,7 @@ const Manifest = (): MetadataRoute.Manifest => {
         name: "SharpNote",
         orientation: "any",
         scope: "/",
-        short_name: "# Note",
+        short_name: "#Note",
         start_url: "/",
         theme_color: "oklch(98.5% 0 0)"
     };

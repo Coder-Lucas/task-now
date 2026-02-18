@@ -1,11 +1,9 @@
 "use client";
 
-import { type ReactNode } from "react";
-
 type TCardProps = {
-    readonly children?: ReactNode;
-    readonly icon?: ReactNode;
-    readonly title?: ReactNode;
+    readonly children?: React.ReactNode;
+    readonly icon?: React.ReactNode;
+    readonly title?: React.ReactNode;
 };
 
 const Card = ({ children = null, icon = null, title = null }: TCardProps) => {

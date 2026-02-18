@@ -12,13 +12,13 @@ importers:
                 version: 4.2.1
             dexie-react-hooks:
                 specifier: 4.2.0
-                version: 4.2.0(@types/react@19.2.13)(dexie@4.2.1)(react@19.2.4)
+                version: 4.2.0(@types/react@19.2.14)(dexie@4.2.1)(react@19.2.4)
             github-markdown-css:
                 specifier: 5.9.0
                 version: 5.9.0
             next:
                 specifier: 16.1.6
-                version: 16.1.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+                version: 16.1.6(@babel/core@7.29.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
             react:
                 specifier: 19.2.4
                 version: 19.2.4
@@ -30,7 +30,7 @@ importers:
                 version: 5.5.0(react@19.2.4)
             react-markdown:
                 specifier: 10.1.0
-                version: 10.1.0(@types/react@19.2.13)(react@19.2.4)
+                version: 10.1.0(@types/react@19.2.14)(react@19.2.4)
             rehype-sanitize:
                 specifier: 6.0.0
                 version: 6.0.0
@@ -45,14 +45,17 @@ importers:
                 specifier: 4.1.18
                 version: 4.1.18
             "@types/node":
-                specifier: 22.15.35
-                version: 22.15.35
+                specifier: 22.19.11
+                version: 22.19.11
             "@types/react":
-                specifier: 19.2.13
-                version: 19.2.13
+                specifier: 19.2.14
+                version: 19.2.14
             "@types/react-dom":
                 specifier: 19.2.3
-                version: 19.2.3(@types/react@19.2.13)
+                version: 19.2.3(@types/react@19.2.14)
+            babel-plugin-react-compiler:
+                specifier: 1.0.0
+                version: 1.0.0
             eslint:
                 specifier: 9.39.2
                 version: 9.39.2(jiti@2.6.1)
@@ -587,16 +590,16 @@ packages:
     "@types/ms@2.1.0":
         resolution: { integrity: sha512-GsCCIZDE/p3i96vtEqx+7dBUGXrc7zeSK3wwPHIaRThS+9OhWIXRqzs4d6k1SVU8g91DrNRWxWUGhp5KXQb2VA== }
 
-    "@types/node@22.15.35":
-        resolution: { integrity: sha512-stV91mHxlWpDksiUiivmFfQzjy2JLlb2NUTxKipiANEbxBZsdbDU9fSrT7SHY4uoCXAxYfJZVasn3x2/hqpd3g== }
+    "@types/node@22.19.11":
+        resolution: { integrity: sha512-BH7YwL6rA93ReqeQS1c4bsPpcfOmJasG+Fkr6Y59q83f9M1WcBRHR2vM+P9eOisYRcN3ujQoiZY8uk5W+1WL8w== }
 
     "@types/react-dom@19.2.3":
         resolution: { integrity: sha512-jp2L/eY6fn+KgVVQAOqYItbF0VY/YApe5Mz2F0aykSO8gx31bYCZyvSeYxCHKvzHG5eZjc+zyaS5BrBWya2+kQ== }
         peerDependencies:
             "@types/react": ^19.2.0
 
-    "@types/react@19.2.13":
-        resolution: { integrity: sha512-KkiJeU6VbYbUOp5ITMIc7kBfqlYkKA5KhEHVrGMmUUMt7NeaZg65ojdPk+FtNrBAOXNVM5QM72jnADjM+XVRAQ== }
+    "@types/react@19.2.14":
+        resolution: { integrity: sha512-ilcTH/UniCkMdtexkoCN0bI7pMcJDvmQFPvuPvmEaYA/NSfFTAgdUSLAoVjaRJm7+6PvcM+q1zYOwS4wTYMF9w== }
 
     "@types/unist@2.0.11":
         resolution: { integrity: sha512-CmBKiL6NNo/OqgmMn95Fk9Whlp2mtvIv+KNpQKN2F4SjvrEesubTRWGYSg+BnWZOnlCaSTU1sMpsBOzgbYhnsA== }
@@ -843,6 +846,9 @@ packages:
     axobject-query@4.1.0:
         resolution: { integrity: sha512-qIj0G9wZbMGNLjLmg1PT6v2mE9AH2zlnADJD/2tC6E00hgmhUOfEB6greHPAfLRSufHqROIUTkw6E+M3lH0PTQ== }
         engines: { node: ">= 0.4" }
+
+    babel-plugin-react-compiler@1.0.0:
+        resolution: { integrity: sha512-Ixm8tFfoKKIPYdCCKYTsqv+Fd4IJ0DQqMyEimo+pxUOMUR9cVPlwTrFt9Avu+3cb6Zp3mAzl+t1MrG2fxxKsxw== }
 
     bail@2.0.2:
         resolution: { integrity: sha512-0xO6mYd7JB2YesxDKplafRpsiOzPt9V02ddPCLbY1xYGPOX24NTyN50qnUxgCPcSoYMhKpAuBTjQoRZCAkUDRw== }
@@ -2826,15 +2832,15 @@ snapshots:
 
     "@types/ms@2.1.0": {}
 
-    "@types/node@22.15.35":
+    "@types/node@22.19.11":
         dependencies:
             undici-types: 6.21.0
 
-    "@types/react-dom@19.2.3(@types/react@19.2.13)":
+    "@types/react-dom@19.2.3(@types/react@19.2.14)":
         dependencies:
-            "@types/react": 19.2.13
+            "@types/react": 19.2.14
 
-    "@types/react@19.2.13":
+    "@types/react@19.2.14":
         dependencies:
             csstype: 3.2.3
 
@@ -3094,6 +3100,10 @@ snapshots:
 
     axobject-query@4.1.0: {}
 
+    babel-plugin-react-compiler@1.0.0:
+        dependencies:
+            "@babel/types": 7.29.0
+
     bail@2.0.2: {}
 
     balanced-match@1.0.2: {}
@@ -3233,9 +3243,9 @@ snapshots:
         dependencies:
             dequal: 2.0.3
 
-    dexie-react-hooks@4.2.0(@types/react@19.2.13)(dexie@4.2.1)(react@19.2.4):
+    dexie-react-hooks@4.2.0(@types/react@19.2.14)(dexie@4.2.1)(react@19.2.4):
         dependencies:
-            "@types/react": 19.2.13
+            "@types/react": 19.2.14
             dexie: 4.2.1
             react: 19.2.4
 
@@ -4395,7 +4405,7 @@ snapshots:
 
     natural-compare@1.4.0: {}
 
-    next@16.1.6(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
+    next@16.1.6(@babel/core@7.29.0)(babel-plugin-react-compiler@1.0.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4):
         dependencies:
             "@next/env": 16.1.6
             "@swc/helpers": 0.5.15
@@ -4414,6 +4424,7 @@ snapshots:
             "@next/swc-linux-x64-musl": 16.1.6
             "@next/swc-win32-arm64-msvc": 16.1.6
             "@next/swc-win32-x64-msvc": 16.1.6
+            babel-plugin-react-compiler: 1.0.0
             sharp: 0.34.5
         transitivePeerDependencies:
             - "@babel/core"
@@ -4564,11 +4575,11 @@ snapshots:
 
     react-is@16.13.1: {}
 
-    react-markdown@10.1.0(@types/react@19.2.13)(react@19.2.4):
+    react-markdown@10.1.0(@types/react@19.2.14)(react@19.2.4):
         dependencies:
             "@types/hast": 3.0.4
             "@types/mdast": 4.0.4
-            "@types/react": 19.2.13
+            "@types/react": 19.2.14
             devlop: 1.1.0
             hast-util-to-jsx-runtime: 2.3.6
             html-url-attributes: 3.0.1

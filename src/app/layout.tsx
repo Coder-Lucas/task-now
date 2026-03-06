@@ -69,7 +69,7 @@ const metadata: Metadata = {
             type: "image/png"
         }
     ],
-    keywords: ["css", "dexiejs", "eslint", "html", "indexeddb", "javascript", "markdown", "netlify", "nextjs", "nodejs", "nvm", "pnpm", "postcss", "prettier", "pwa", "react", "tailwindcss", "typescript", "vercel", "web"],
+    keywords: ["css", "dexiejs", "docker", "eslint", "html", "indexeddb", "javascript", "markdown", "netlify", "nextjs", "nodejs", "nvm", "pnpm", "postcss", "prettier", "pwa", "react", "tailwindcss", "typescript", "vercel"],
     manifest: "/manifest.webmanifest",
     referrer: "origin",
     robots: "follow, index",
@@ -84,8 +84,10 @@ const viewport: Viewport = {
 const RootLayout = ({ children }: TRootLayoutProps) => {
     return (
         <html className="bg-zinc-50 text-base scheme-light-dark dark:bg-zinc-950" dir="ltr" lang="zh-Hans-CN">
-            <head />
-            <body className="mt-16 flow-root font-serif text-zinc-950 dark:text-zinc-50">
+            <head>
+                <meta charSet="UTF-8" />
+            </head>
+            <body className="mt-16 flow-root font-mono text-zinc-950 dark:text-zinc-50">
                 <Header />
                 {children}
                 <Footer />

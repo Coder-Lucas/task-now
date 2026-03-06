@@ -1,20 +1,20 @@
 # AGENTS.md
 
-This document provides guidelines for agentic coding agents working in this repository.
+This document provides guidance for intelligent coding agents (such as opencode) when working on the SharpNote project.
 
 ## Project Overview
 
-SharpNote is a Next.js 16 PWA application for Markdown note-taking with storage abstraction layer. The project uses TypeScript, React 19, Tailwind CSS v4, and follows a component-based architecture.
+SharpNote is a Next.js 16-based PWA application that provides Markdown note-taking functionality, using a storage abstraction layer design. The project uses TypeScript, React 19, and Tailwind CSS v4, following a component-based architecture.
 
 **Storage Architecture:**
 
-- **Current**: IndexedDB via Dexie.js (`@lib/db.ts`)
-- **Storage Interface**: Future-ready interface (`INoteStorage`) allows easy backend replacement
+- **Current Implementation**: IndexedDB based on Dexie.js (`@lib/db.ts`)
+- **Storage Interface**: The `INoteStorage` interface supports easy future replacement of backend storage
 
 ## Environment Requirements
 
 - **Node.js**: 22.22.0
-- **pnpm**: 10.29.3
+- **pnpm**: 10.30.3
 - **TypeScript**: 5.9.3
 - **ESLint**: 9.39.2
 - **Prettier**: 3.8.1
@@ -22,13 +22,13 @@ SharpNote is a Next.js 16 PWA application for Markdown note-taking with storage 
 ## Build Commands
 
 ```bash
-# Install dependencies (requires pnpm 10.29.3)
+# Install dependencies (requires pnpm v10.30.3)
 pnpm i
 
 # Start development server
 pnpm dev
 
-# Build for production
+# Production build
 pnpm build
 
 # Start production server
@@ -40,32 +40,83 @@ pnpm type
 # Linting
 pnpm lint
 
-# Prettier check (format validation)
+# Format verification
 pnpm check
 
-# Formatting (write changes)
+# Code formatting (writes changes)
 pnpm format
+```
+
+## Code Quality Check Process
+
+The project uses multi-layered code quality checks to ensure code conforms to standards:
+
+### 1. Type Checking (pnpm type)
+
+Uses TypeScript compiler for strict type checking:
+
+```bash
+pnpm type
+```
+
+- Enables all strict flags (`strict: true`, `alwaysStrict: true`)
+- Enables strict type checking such as `noImplicitAny`, `strictNullChecks`
+- Ensures type safety is the primary principle of development
+
+### 2. Code Quality Check (pnpm lint)
+
+Uses ESLint to check code quality and potential issues:
+
+```bash
+pnpm lint
+```
+
+- Based on `eslint-config-next/core-web-vitals`
+- Based on `eslint-config-next/typescript`
+- Uses `eslint-config-prettier/flat` to avoid conflicts with Prettier
+
+### 3. Code Format Verification (pnpm check)
+
+Uses Prettier to verify code formatting:
+
+```bash
+pnpm check
+```
+
+### 4. Complete Quality Check Process
+
+Run the following commands before committing code:
+
+```bash
+# Run all checks in sequence
+pnpm type && pnpm lint && pnpm check
 ```
 
 ## Editor Configuration
 
-The project uses `.editorconfig` for basic editor settings:
+The project uses `.editorconfig` to provide basic editor settings:
 
-- charset: UTF-8
+- Character set: UTF-8
 
-## Code Style Guidelines
+Recommended VSCode extensions:
 
-### Imports
+- ESLint
+- Prettier - Code formatter
+- Tailwind CSS IntelliSense
+
+## Code Style Guide
+
+### Import Organization
 
 Organize imports in the following order:
 
-1. React imports (named)
+1. React imports (named imports)
 2. Next.js imports (mixed)
 3. Third-party libraries (default + named)
-4. Path aliases for internal modules
+4. Path alias internal modules
 
 ```typescript
-// React imports (named with type keyword for type-only imports)
+// React imports (type imports use the type keyword)
 import { type ReactNode } from "react";
 
 // Next.js imports (mixed)
@@ -77,7 +128,7 @@ import Link from "next/link";
 import Dexie, { type Table } from "dexie";
 import { HiOutlineCheckCircle } from "react-icons/hi";
 
-// Path aliases for internal modules
+// Path alias internal modules
 import Header from "#/header.tsx";
 import { createNote } from "@lib/db.ts";
 import "@styles/main.css";
@@ -85,7 +136,7 @@ import "@styles/main.css";
 
 ### Path Aliases
 
-Configure imports using these aliases defined in `tsconfig.json`:
+Use path aliases defined in `tsconfig.json`:
 
 - `#/*` → `src/components/*`
 - `@/*` → `src/app/*`
@@ -94,70 +145,7 @@ Configure imports using these aliases defined in `tsconfig.json`:
 - `@styles/*` → `src/styles/*`
 - `~/*` → `./*`
 
-### TypeScript
-
-- Use strict TypeScript with all strict flags enabled (`strict: true`, `alwaysStrict: true`)
-- Prefix all type definitions with `T`:
-    ```typescript
-    type TNote = {
-        readonly id: string;
-        readonly name: string;
-        readonly text: string;
-        readonly time: string;
-        readonly deletedAt: string | null;
-    };
-    type TRootLayoutProps = {
-        readonly children: React.ReactNode;
-    };
-    ```
-- Use `Readonly<{}>` for component props when additional type safety is needed:
-    ```typescript
-    type TItemProps = Readonly<{
-        readonly children?: React.ReactNode;
-        readonly href?: string;
-    }>;
-    ```
-- Component functions can use implicit typing or explicit props type:
-    ```typescript
-    const Header = () => { ... };
-    const Item = ({ children = null, href = "about:blank" }: TItemProps) => { ... };
-    ```
-- Use explicit return types for database functions:
-    ```typescript
-    const createNote: ({ name, text }: Pick<TNote, "name" | "text">) => Promise<TNote | undefined> = async ({ name, text }) => {
-        // implementation
-        return note;
-    };
-    ```
-- Use `React.ReactNode` (global type) instead of importing `ReactNode` from react
-
-### Naming Conventions
-
-- **Components**: PascalCase (e.g., `Header`, `Footer`, `CTA`, `Index`)
-- **Files**: Match component name (e.g., `header.tsx`, `footer.tsx`, `button.tsx`)
-- **Variables/functions**: camelCase (e.g., `createNote`, `retrieveNote`, `init`)
-- **Constants**: camelCase or UPPER_SNAKE_CASE for config constants
-- **Types**: Prefix with `T` (e.g., `TNote`, `TRootLayoutProps`, `TItemProps`)
-- **Classes**: PascalCase (e.g., `SharpNoteDB`)
-- **Database utility functions**: PascalCase prefixed with class name (e.g., `SharpNoteDB.uuid()`)
-
-### ESLint & Formatting
-
-**ESLint Configuration** (`eslint.config.js`):
-
-```javascript
-import Vitals from "eslint-config-next/core-web-vitals";
-import Typescript from "eslint-config-next/typescript";
-import Prettier from "eslint-config-prettier/flat";
-import { defineConfig } from "eslint/config";
-
-const config = defineConfig([...Vitals, ...Typescript, Prettier]);
-
-export default config;
-```
-
-- Extends `eslint-config-next/core-web-vitals`, `eslint-config-next/typescript`, and `eslint-config-prettier/flat`
-- Run `pnpm lint` to check code quality
+### Code Formatting Rules
 
 **Prettier Configuration** (`prettier.config.js`):
 
@@ -181,52 +169,74 @@ const config = {
 export default config;
 ```
 
-- Uses `prettier-plugin-organize-imports` for import organization
-- Uses `prettier-plugin-tailwindcss` for Tailwind class sorting
-- Run `pnpm format` before committing to auto-format code
-- Run `pnpm check` to validate formatting
+**Formatting Rules Key Points:**
 
-### Components & React Patterns
+- Use `prettier-plugin-organize-imports` to automatically organize imports
+- Use `prettier-plugin-tailwindcss` to automatically sort Tailwind class names
+- Unlimited line width (`printWidth: Infinity`)
+- Use 4 spaces for indentation
+- Use LF line endings
+- No trailing commas
+- Use double quotes
 
-- Use `"use client"` directive for client-side components
-- Component functions can use implicit typing or explicit props type:
-    ```typescript
-    const Footer = () => { ... };
-    const Button = ({ children = null, onClick = () => {} }: TButtonProps) => { ... };
-    ```
-- Destructure props with default values when appropriate:
-    ```typescript
-    const Item = ({ children = null, href = "about:blank" }: TItemProps) => { ... };
-    ```
-- Use `ReactNode` for children that accept any valid React content
-- Use default exports for components:
-    ```typescript
-    export default Header;
-    ```
-- Use named exports for utilities, types, and metadata:
-    ```typescript
-    export { createNote };
-    export { metadata, viewport };
-    ```
-- Special components use prefixes: `NextError`, `NextLoading`, `RootLayout`
-- Page components use PascalCase naming (e.g., `Index`, `Manifest`, `Fn`)
-- Database functions use explicit return types
+### TypeScript Usage Guidelines
 
-### Error Handling
+- Use strict TypeScript mode (all strict flags enabled)
+- All type definitions use the `T` prefix:
+    ```typescript
+    type TNote = {
+        readonly id: string;
+        readonly name: string;
+        readonly text: string;
+        readonly time: string;
+        readonly deletedAt: string | null;
+    };
+    type TRootLayoutProps = {
+        readonly children: React.ReactNode;
+    };
+    ```
+- Use `Readonly<{}>` when additional type safety is needed:
+    ```typescript
+    type TItemProps = Readonly<{
+        readonly children?: React.ReactNode;
+        readonly href?: string;
+    }>;
+    ```
+- Component functions can use implicit types or explicit props types
+- Database functions use explicit return types:
+    ```typescript
+    const createNote: ({ name, text }: Pick<TNote, "name" | "text">) => Promise<TNote | undefined> = async ({ name, text }) => {
+        // Implementation
+        return note;
+    };
+    ```
+- Use `React.ReactNode` (global type) instead of importing from react
 
-Use try-catch blocks with proper logging:
+### Naming Conventions
+
+- **Components**: PascalCase (e.g., `Header`, `Footer`, `CTA`, `Index`)
+- **Files**: Match component names (e.g., `header.tsx`, `footer.tsx`, `button.tsx`)
+- **Variables/Functions**: camelCase (e.g., `createNote`, `retrieveNote`, `init`)
+- **Constants**: camelCase or UPPER_SNAKE_CASE (for configuration constants)
+- **Types**: Use `T` prefix (e.g., `TNote`, `TRootLayoutProps`, `TItemProps`)
+- **Classes**: PascalCase (e.g., `SharpNoteDB`)
+- **Database utility functions**: PascalCase, starting with class name (e.g., `SharpNoteDB.uuid()`)
+
+### Error Handling Guidelines
+
+Use try-catch blocks for error handling:
 
 ```typescript
 try {
     await db.notes.add({ name, text });
-    console.info("INFO: Note添加成功");
+    console.info("INFO: Note added successfully");
 } catch (e) {
     console.error(`ERROR: ${e}`);
     throw e;
 }
 ```
 
-Database initialization with error handling:
+Database initialization error handling:
 
 ```typescript
 async init() {
@@ -243,174 +253,45 @@ async init() {
 }
 ```
 
-### Tailwind CSS
+**Error Handling Key Points:**
 
-- Use Tailwind v4 with `@import "tailwindcss";` in CSS files
-- Use `@tailwindcss/postcss` in PostCSS configuration
-- Use dark mode classes: `dark:bg-zinc-950`, `dark:text-zinc-50`
-- Use color scheme support with `scheme-light-dark`
-- Use `font-serif` for body text (project requirement)
-- Color palette: `indigo-700/300` for accent, `zinc-50/950` for backgrounds
-- Consistent spacing and layout patterns from existing components
-- Use utility classes for transitions: `transition-colors duration-200 ease-in-out`
-- Use `backdrop-blur-xs` and `backdrop-saturate-150` for glassmorphism effects
-- Use flow layout: `flow-root` for main containers
+- Use `console.info` to log successful operations
+- Use `console.error` to log errors
+- Always throw errors to notify callers
+- Check browser environment during database initialization
 
-### PWA Configuration
+### Console Logging Guidelines
 
-- Configure manifest in `src/app/manifest.ts`
-- Set viewport and theme color in layout metadata
-- Use proper PWA metadata for app installation
-- Ensure proper color scheme support with `scheme-light-dark`
-- Theme color: `oklch(98.5% 0 0)`
-- Background color: `oklch(14.1% 0.005 285.823)`
+Follow these logging patterns:
 
-### File Organization
-
-```
-src/
-├── app/           # Next.js App Router pages, layouts, manifest.ts, robots.ts, sitemap.ts
-├── components/    # Reusable UI components
-├── lib/           # Utilities and database logic
-├── styles/        # Global styles and Tailwind imports
-└── hooks/         # Custom React hooks (when added)
-```
-
-### Client / Server Components
-
-- Add `"use client"` at the top of files containing:
-    - `useState`, `useEffect`, or other hooks
-    - Event handlers (onClick, onChange, etc.)
-    - Browser-only APIs
-- Keep server components as default (no directive needed)
-- Database operations typically require `"use client"` due to browser-only IndexedDB
-
-### Console Logging
-
-Follow this pattern for console output:
-
-- `console.info("INFO: ...")` for successful operations (uses Chinese text in practice)
+- `console.info("INFO: ...")` for successful operations
 - `console.error(`ERROR: ${e}`)` for errors
-- Place initialization messages in global scope
+- Initialization messages placed in global scope
 
-Examples:
+Example:
 
 ```typescript
-console.info("INFO: Note添加成功");
-console.info("INFO: 数据库创建完成");
+console.info("INFO: Note added successfully");
+console.info("INFO: Database created successfully");
 console.error(`ERROR: ${e}`);
 ```
 
-### Database Patterns
+## Components and React Patterns
 
-SharpNote uses IndexedDB via Dexie.js for local-first data persistence.
+### Client/Server Components
 
-**Database Setup:**
+Add `"use client"` at the top of files containing:
 
-```typescript
-import Dexie, { type Table } from "dexie";
+- `useState`, `useEffect`, or other hooks
+- Event handlers (onClick, onChange, etc.)
+- Browser-only APIs
+- Database operations (since IndexedDB is browser-only)
 
-type TNote = {
-    readonly id: string;
-    readonly name: string;
-    readonly text: string;
-    readonly time: string;
-    readonly deletedAt: string | null;
-};
-
-class SharpNoteDB extends Dexie {
-    notes: Table<TNote, string, TNote> = undefined!;
-
-    constructor() {
-        super("SharpNoteDB");
-    }
-
-    async init() {
-        if (typeof window === "undefined") {
-            throw new Error("数据库只能在浏览器环境中初始化");
-        }
-        try {
-            this.version(1).stores({
-                notes: "id, name, text, time, deletedAt"
-            });
-            await this.open();
-        } catch (e) {
-            console.error(`ERROR: ${e}`);
-            throw e;
-        }
-    }
-}
-```
-
-**Database Functions:**
-
-```typescript
-import { createNote, retrieveNote, updateNote, type TNote } from "@lib/db.ts";
-
-const MyComponent = () => {
-    // CRUD operations
-    const handleCreate = async () => {
-        await createNote({ name: "New Note", text: "Content" });
-    };
-
-    // ...
-};
-```
-
-**Available Functions in `@lib/db.ts`:**
-
-- `createNote({ name, text })` - Create a new note
-- `retrieveNote(id)` - Get a note by ID
-- `retrieveNotes()` - Get all active notes
-- `retrieveDeletedNotes()` - Get all deleted notes (trash)
-- `updateNote(id, { name, text })` - Update a note
-- `softDeleteNote(id)` - Move a note to trash
-- `restoreNote(id)` - Restore a note from trash
-- `permanentlyDeleteNote(id)` - Permanently delete a note
-- `searchNotes(query)` - Search notes by name or content
-- `cleanExpiredNotes()` - Clean notes expired from trash (retention: 30 days)
-
-### Metadata Configuration
-
-- Use named exports for `metadata` and `viewport` objects
-- Configure viewport with `colorScheme: "light dark"` and theme color
-- Use proper Chinese locale settings: `lang="zh-Hans-CN"`
-- Include comprehensive metadata for PWA and SEO
-
-```typescript
-const metadata: Metadata = {
-    authors: {
-        name: "Lucas",
-        url: "https://github.com/Coder-Lucas"
-    },
-    applicationName: "SharpNote",
-    description: "...",
-    icons: [...],
-    manifest: "/manifest.webmanifest",
-    title: "SharpNote"
-};
-
-const viewport: Viewport = {
-    colorScheme: "light dark",
-    themeColor: "oklch(98.5% 0 0)"
-};
-```
-
-### Image and Link Usage
-
-- Use `preload={true}` for critical images (favicon)
-- Use `prefetch={true}` for navigation links
-- Specify `alt`, `height`, `width` for all images
-- Use relative paths for internal navigation
-
-```typescript
-<Image alt="favicon" height={48} preload={true} src="/favicon.svg" width={48} />
-<Link href="/" prefetch={true}>...</Link>
-```
+Keep server components as the default (no directive needed).
 
 ### Component Structure Examples
 
-**Simple Functional Component:**
+**Simple Function Component:**
 
 ```typescript
 "use client";
@@ -469,4 +350,156 @@ const Item = ({ children = null, href = "about:blank" }: TItemProps) => {
 };
 
 export default Item;
+```
+
+### Component Export Conventions
+
+- Components use default exports:
+    ```typescript
+    export default Header;
+    ```
+- Utility functions, types, and metadata use named exports:
+    ```typescript
+    export { createNote };
+    export { metadata, viewport };
+    ```
+- Special components use prefixes: `NextError`, `NextLoading`, `RootLayout`
+- Page components use PascalCase naming (e.g., `Index`, `Manifest`, `Fn`)
+
+## Tailwind CSS Guidelines
+
+- Use Tailwind v4, with `@import "tailwindcss";` in CSS files
+- Use `@tailwindcss/postcss` in PostCSS configuration
+- Use dark mode classes: `dark:bg-zinc-950`, `dark:text-zinc-50`
+- Use `scheme-light-dark` for color scheme support
+- Color scheme: accent uses `indigo-700/300`, background uses `zinc-50/950`
+- Use utility classes for transitions: `transition-colors duration-200 ease-in-out`
+- Use glassmorphism effects: `backdrop-blur-xs`, `backdrop-saturate-150`
+- Main container uses flow layout: `flow-root`
+
+## PWA Configuration
+
+- Configure manifest in `src/app/manifest.ts`
+- Set viewport and theme color in layout metadata
+- Use appropriate PWA metadata for app installation
+- Ensure `scheme-light-dark` is used for correct color scheme support
+- Theme color: `oklch(98.5% 0 0)`
+- Background color: `oklch(14.1% 0.005 285.823)`
+
+## File Organization
+
+```
+src/
+├── app/           # Next.js App Router pages, layouts, manifest.ts, robots.ts, sitemap.ts
+├── components/    # Reusable UI components
+├── lib/           # Utility functions and database logic
+├── styles/        # Global styles and Tailwind imports
+└── hooks/         # Custom React Hooks (if any)
+```
+
+## Database Schema
+
+SharpNote uses Dexie.js with IndexedDB for local-first data persistence.
+
+### Database Setup
+
+```typescript
+import Dexie, { type Table } from "dexie";
+
+type TNote = {
+    readonly id: string;
+    readonly name: string;
+    readonly text: string;
+    readonly time: string;
+    readonly deletedAt: string | null;
+};
+
+class SharpNoteDB extends Dexie {
+    notes: Table<TNote, string, TNote> = undefined!;
+
+    constructor() {
+        super("SharpNoteDB");
+    }
+
+    async init() {
+        if (typeof window === "undefined") {
+            throw new Error("Database can only be initialized in browser environment");
+        }
+        try {
+            this.version(1).stores({
+                notes: "id, name, text, time, deletedAt"
+            });
+            await this.open();
+        } catch (e) {
+            console.error(`ERROR: ${e}`);
+            throw e;
+        }
+    }
+}
+```
+
+### Database Functions
+
+```typescript
+import { createNote, retrieveNote, updateNote, type TNote } from "@lib/db.ts";
+
+const MyComponent = () => {
+    // CRUD operations
+    const handleCreate = async () => {
+        await createNote({ name: "New Note", text: "Content" });
+    };
+
+    // ...
+};
+```
+
+### Available Functions (`@lib/db.ts`)
+
+- `createNote({ name, text })` - Create a new note
+- `retrieveNote(id)` - Get a note by ID
+- `retrieveNotes()` - Get all active notes
+- `retrieveDeletedNotes()` - Get all deleted notes (trash)
+- `updateNote(id, { name, text })` - Update a note
+- `softDeleteNote(id)` - Move a note to trash
+- `restoreNote(id)` - Restore a note from trash
+- `permanentlyDeleteNote(id)` - Permanently delete a note
+- `searchNotes(query)` - Search notes by name or content
+- `cleanExpiredNotes()` - Clean up expired notes in trash (retention period: 30 days)
+
+## Metadata Configuration
+
+- Export `metadata` and `viewport` objects using named exports
+- Configure viewport with `colorScheme: "light dark"` and theme color
+- Use correct Chinese language setting: `lang="zh-Hans-CN"`
+- Include comprehensive PWA and SEO metadata
+
+```typescript
+const metadata: Metadata = {
+    authors: {
+        name: "Lucas",
+        url: "https://github.com/Coder-Lucas"
+    },
+    applicationName: "SharpNote",
+    description: "...",
+    icons: [...],
+    manifest: "/manifest.webmanifest",
+    title: "SharpNote"
+};
+
+const viewport: Viewport = {
+    colorScheme: "light dark",
+    themeColor: "oklch(98.5% 0 0)"
+};
+```
+
+## Image and Link Usage
+
+- Use `preload={true}` for critical images (e.g., favicon)
+- Use `prefetch={true}` for navigation links
+- Specify `alt`, `height`, `width` for all images
+- Use relative paths for internal navigation
+
+```typescript
+<Image alt="favicon" height={48} preload={true} src="/favicon.svg" width={48} />
+<Link href="/" prefetch={true}>...</Link>
 ```

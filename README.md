@@ -1,7 +1,7 @@
 # SharpNote
 
-[![GitHub Repo](https://img.shields.io/badge/GitHub-Repo-blue.svg?logo=github&style=flat-square)](https://github.com/Coder-Lucas/sharp-note.git)
-[![Netlify Website](https://img.shields.io/badge/Netlify-Website-blue.svg?logo=netlify&style=flat-square)](https://shnt.netlify.app)
+[![GitHub Stars](https://img.shields.io/github/stars/Coder-Lucas/sharp-note)](https://app.netlify.com/projects/shnt/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/7a83d6f3-90f4-44cb-8b52-692fe724077e/deploy-status)](https://app.netlify.com/projects/shnt/deploys)
 
 ## 中文
 
@@ -17,7 +17,8 @@
         4. [本地部署](#本地部署)
             1. [使用 Docker](#使用-docker)
             2. [使用 nvm](#使用-nvm)
-            3. [使用 Node.js v22.22.0](#使用-nodejs-v22220)
+            3. [使用 fnm](#使用-fnm)
+            4. [使用 Node.js v22.22.0](#使用-nodejs-v22220)
         5. [许可证](#许可证)
         6. [联系我们](#联系我们)
     2. [English](#english)
@@ -66,8 +67,36 @@ nvm install 22.22.0
 # 切换到 Node.js v22.22.0
 nvm use 22.22.0
 
-# 全局安装 pnpm v10.29.3
-npm i -g pnpm@10.29.3
+# 全局安装 pnpm v10.30.3
+npm i -g pnpm@10.30.3
+
+# 克隆项目代码
+git clone https://github.com/Coder-Lucas/sharp-note.git
+
+# 进入项目目录
+cd sharp-note
+
+# 安装项目依赖
+pnpm i
+
+# 构建生产环境
+pnpm build
+
+# 启动生产服务器
+pnpm start
+```
+
+#### 使用 fnm
+
+```bash
+# 安装 Node.js v22.22.0
+fnm install 22.22.0
+
+# 切换到 Node.js v22.22.0
+fnm use 22.22.0
+
+# 全局安装 pnpm v10.30.3
+npm i -g pnpm@10.30.3
 
 # 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -88,8 +117,8 @@ pnpm start
 #### 使用 Node.js v22.22.0
 
 ```bash
-# 全局安装 pnpm v10.29.3
-npm i -g pnpm@10.29.3
+# 全局安装 pnpm v10.30.3
+npm i -g pnpm@10.30.3
 
 # 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -109,13 +138,15 @@ pnpm start
 
 ### 许可证
 
-> 本应用遵循 The
-> [MIT License](https://opensource.org/license/mit)
+> 本应用遵循
+> [The MIT License (MIT)](https://opensource.org/license/mit)
 
 ### 联系我们
 
-> [发送邮件](mailto:sharpnote.yen802@aleeas.com)
-> 以联系我们
+> 联系邮箱:
+> sharp-note.nag104@aleeas.com
+> sharp-note.pox340@aleeas.com
+> sharp-note.wok240@aleeas.com
 
 ## English
 
@@ -133,7 +164,8 @@ English Version of the **README** Doc.
         4. [Local Deployment](#local-deployment)
             1. [Use Docker](#use-docker)
             2. [Use nvm](#use-nvm)
-            3. [Use Node.js v22.22.0](#use-nodejs-v22220)
+            3. [Use fnm](#use-fnm)
+            4. [Use Node.js v22.22.0](#use-nodejs-v22220)
         5. [License](#license)
         6. [Contact Us](#contact-us)
 
@@ -180,8 +212,8 @@ nvm install 22.22.0
 # Switch to Node.js v22.22.0
 nvm use 22.22.0
 
-# Globally install pnpm v10.29.3
-npm i -g pnpm@10.29.3
+# Globally install pnpm v10.30.3
+npm i -g pnpm@10.30.3
 
 # Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -199,11 +231,39 @@ pnpm build
 pnpm start
 ```
 
-#### use Node.js v22.22.0
+#### Use fnm
 
 ```bash
-# Globally install pnpm v10.29.3
-npm i -g pnpm@10.29.3
+# Install Node.js v22.22.0
+fnm install 22.22.0
+
+# Switch to Node.js v22.22.0
+fnm use 22.22.0
+
+# Globally install pnpm v10.30.3
+npm i -g pnpm@10.30.3
+
+# Clone the repo
+git clone https://github.com/Coder-Lucas/sharp-note.git
+
+# Enter the project dir
+cd sharp-note
+
+# Install project dependencies
+pnpm i
+
+# Build for production
+pnpm build
+
+# Start the production server
+pnpm start
+```
+
+#### Use Node.js v22.22.0
+
+```bash
+# Globally install pnpm v10.30.3
+npm i -g pnpm@10.30.3
 
 # Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -223,10 +283,12 @@ pnpm start
 
 ### License
 
-> This app is licensed under the
-> [MIT License](https://opensource.org/license/mit)
+> This app is licensed under
+> [the MIT License (MIT)](https://opensource.org/license/mit)
 
 ### Contact Us
 
-> [Send an email](mailto:sharpnote.yen802@aleeas.com)
-> to contact us
+> Contact Email:
+> sharp-note.nag104@aleeas.com
+> sharp-note.pox340@aleeas.com
+> sharp-note.wok240@aleeas.com

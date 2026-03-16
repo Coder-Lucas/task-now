@@ -14,7 +14,7 @@ SharpNote is a Next.js 16-based PWA application that provides Markdown note-taki
 ## Environment Requirements
 
 - **Node.js**: 22.22.0
-- **pnpm**: 10.30.3
+- **pnpm**: 10.32.1
 - **TypeScript**: 5.9.3
 - **ESLint**: 9.39.2
 - **Prettier**: 3.8.1
@@ -22,7 +22,7 @@ SharpNote is a Next.js 16-based PWA application that provides Markdown note-taki
 ## Build Commands
 
 ```bash
-# Install dependencies (requires pnpm v10.30.3)
+# Install dependencies (requires pnpm v10.32.1)
 pnpm i
 
 # Start development server

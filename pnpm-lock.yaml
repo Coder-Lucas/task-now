@@ -26,8 +26,8 @@ importers:
                 specifier: 19.2.4
                 version: 19.2.4(react@19.2.4)
             react-icons:
-                specifier: 5.5.0
-                version: 5.5.0(react@19.2.4)
+                specifier: 5.6.0
+                version: 5.6.0(react@19.2.4)
             react-markdown:
                 specifier: 10.1.0
                 version: 10.1.0(@types/react@19.2.14)(react@19.2.4)
@@ -37,6 +37,9 @@ importers:
             remark-gfm:
                 specifier: 4.0.1
                 version: 4.0.1
+            sharp:
+                specifier: 0.34.5
+                version: 0.34.5
             uuid:
                 specifier: 13.0.0
                 version: 13.0.0
@@ -66,8 +69,8 @@ importers:
                 specifier: 10.1.8
                 version: 10.1.8(eslint@9.39.2(jiti@2.6.1))
             postcss:
-                specifier: 8.5.6
-                version: 8.5.6
+                specifier: 8.5.8
+                version: 8.5.8
             prettier:
                 specifier: 3.8.1
                 version: 3.8.1
@@ -1930,8 +1933,8 @@ packages:
         resolution: { integrity: sha512-PS08Iboia9mts/2ygV3eLpY5ghnUcfLV/EXTOW1E2qYxJKGGBUtNjN76FYHnMs36RmARn41bC0AZmn+rR0OVpQ== }
         engines: { node: ^10 || ^12 || >=14 }
 
-    postcss@8.5.6:
-        resolution: { integrity: sha512-3Ybi1tAuwAP9s0r1UQ2J4n5Y0G05bJkpUIO0/bI9MhwmD70S5aTWbXGBwxHrelT+XM1k6dM0pk+SwNkpTRN7Pg== }
+    postcss@8.5.8:
+        resolution: { integrity: sha512-OW/rX8O/jXnm82Ey1k44pObPtdblfiuWnrd8X7GJ7emImCOstunGbXUpp7HdBrFQX6rJzn3sPT397Wp5aCwCHg== }
         engines: { node: ^10 || ^12 || >=14 }
 
     prelude-ls@1.2.1:
@@ -2026,8 +2029,8 @@ packages:
         peerDependencies:
             react: ^19.2.4
 
-    react-icons@5.5.0:
-        resolution: { integrity: sha512-MEFcXdkP3dLo8uumGI5xN3lDFNsRtrjbOEKDLD7yv76v4wpnEq2Lt2qeHaQOr34I/wPN3s3+N08WkQ+CW37Xiw== }
+    react-icons@5.6.0:
+        resolution: { integrity: sha512-RH93p5ki6LfOiIt0UtDyNg/cee+HLVR6cHHtW3wALfo+eOHTp8RnU2kRkI6E+H19zMIs03DyxUG/GfZMOGvmiA== }
         peerDependencies:
             react: "*"
 
@@ -2561,8 +2564,7 @@ snapshots:
 
     "@humanwhocodes/retry@0.4.3": {}
 
-    "@img/colour@1.0.0":
-        optional: true
+    "@img/colour@1.0.0": {}
 
     "@img/sharp-darwin-arm64@0.34.5":
         optionalDependencies:
@@ -2800,7 +2802,7 @@ snapshots:
             "@alloc/quick-lru": 5.2.0
             "@tailwindcss/node": 4.2.1
             "@tailwindcss/oxide": 4.2.1
-            postcss: 8.5.6
+            postcss: 8.5.8
             tailwindcss: 4.2.1
 
     "@tybys/wasm-util@0.10.1":
@@ -4531,7 +4533,7 @@ snapshots:
             picocolors: 1.1.1
             source-map-js: 1.2.1
 
-    postcss@8.5.6:
+    postcss@8.5.8:
         dependencies:
             nanoid: 3.3.11
             picocolors: 1.1.1
@@ -4569,7 +4571,7 @@ snapshots:
             react: 19.2.4
             scheduler: 0.27.0
 
-    react-icons@5.5.0(react@19.2.4):
+    react-icons@5.6.0(react@19.2.4):
         dependencies:
             react: 19.2.4
 
@@ -4753,7 +4755,6 @@ snapshots:
             "@img/sharp-win32-arm64": 0.34.5
             "@img/sharp-win32-ia32": 0.34.5
             "@img/sharp-win32-x64": 0.34.5
-        optional: true
 
     shebang-command@2.0.0:
         dependencies:

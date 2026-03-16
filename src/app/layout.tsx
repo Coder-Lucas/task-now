@@ -32,10 +32,12 @@ const metadata: Metadata = {
     icons: [
         {
             url: "/favicon.svg",
+            sizes: "any",
             type: "image/svg"
         },
         {
             url: "/favicon-srgb.svg",
+            sizes: "any",
             type: "image/svg"
         },
         {

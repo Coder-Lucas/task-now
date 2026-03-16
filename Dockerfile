@@ -1,5 +1,5 @@
 FROM node:22.22.0-alpine AS builder
-RUN npm i -g pnpm@10.30.3
+RUN npm i -g pnpm@10.32.1
 WORKDIR /usr/node/app
 COPY package.json pnpm-lock.yaml .
 RUN pnpm i
@@ -18,6 +18,5 @@ COPY --from=builder /usr/node/app/.next/static .next/static
 COPY --from=builder /usr/node/app/public public
 USER node
 EXPOSE 3000
-HEALTHCHECK CMD wget  -qO- http://127.0.0.1:3000 | grep -q OK
 ENTRYPOINT ["node"]
 CMD ["server.js"]

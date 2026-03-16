@@ -67,8 +67,8 @@ nvm install 22.22.0
 # 切换到 Node.js v22.22.0
 nvm use 22.22.0
 
-# 全局安装 pnpm v10.30.3
-npm i -g pnpm@10.30.3
+# 全局安装 pnpm v10.32.1
+npm i -g pnpm@10.32.1
 
 # 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -95,8 +95,8 @@ fnm install 22.22.0
 # 切换到 Node.js v22.22.0
 fnm use 22.22.0
 
-# 全局安装 pnpm v10.30.3
-npm i -g pnpm@10.30.3
+# 全局安装 pnpm v10.32.1
+npm i -g pnpm@10.32.1
 
 # 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -117,8 +117,8 @@ pnpm start
 #### 使用 Node.js v22.22.0
 
 ```bash
-# 全局安装 pnpm v10.30.3
-npm i -g pnpm@10.30.3
+# 全局安装 pnpm v10.32.1
+npm i -g pnpm@10.32.1
 
 # 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -212,8 +212,8 @@ nvm install 22.22.0
 # Switch to Node.js v22.22.0
 nvm use 22.22.0
 
-# Globally install pnpm v10.30.3
-npm i -g pnpm@10.30.3
+# Globally install pnpm v10.32.1
+npm i -g pnpm@10.32.1
 
 # Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -240,8 +240,8 @@ fnm install 22.22.0
 # Switch to Node.js v22.22.0
 fnm use 22.22.0
 
-# Globally install pnpm v10.30.3
-npm i -g pnpm@10.30.3
+# Globally install pnpm v10.32.1
+npm i -g pnpm@10.32.1
 
 # Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -262,8 +262,8 @@ pnpm start
 #### Use Node.js v22.22.0
 
 ```bash
-# Globally install pnpm v10.30.3
-npm i -g pnpm@10.30.3
+# Globally install pnpm v10.32.1
+npm i -g pnpm@10.32.1
 
 # Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git

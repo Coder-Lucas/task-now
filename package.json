@@ -1,41 +1,37 @@
 {
     "$schema": "https://json.schemastore.org/package.json",
     "dependencies": {
-        "dexie": "4.2.1",
-        "dexie-react-hooks": "4.2.0",
-        "github-markdown-css": "5.9.0",
+        "dexie": "4.4.3",
+        "dexie-react-hooks": "4.4.0",
         "next": "16.1.6",
-        "react": "19.2.4",
-        "react-dom": "19.2.4",
+        "react": "19.2.7",
+        "react-dom": "19.2.7",
         "react-icons": "5.6.0",
-        "react-markdown": "10.1.0",
-        "rehype-sanitize": "6.0.0",
-        "remark-gfm": "4.0.1",
-        "uuid": "13.0.0"
+        "uuid": "14.0.0"
     },
     "devDependencies": {
-        "@tailwindcss/postcss": "4.2.1",
+        "@tailwindcss/postcss": "4.3.1",
         "@types/node": "22.19.11",
-        "@types/react": "19.2.14",
+        "@types/react": "19.2.17",
         "@types/react-dom": "19.2.3",
         "babel-plugin-react-compiler": "1.0.0",
         "eslint": "9.39.2",
-        "eslint-config-next": "16.1.6",
+        "eslint-config-next": "16.2.9",
         "eslint-config-prettier": "10.1.8",
-        "postcss": "8.5.8",
-        "prettier": "3.8.1",
+        "postcss": "8.5.15",
+        "prettier": "3.8.4",
         "prettier-plugin-organize-imports": "4.3.0",
-        "prettier-plugin-tailwindcss": "0.7.2",
+        "prettier-plugin-tailwindcss": "0.8.0",
         "sharp": "0.34.5",
-        "tailwindcss": "4.2.1",
+        "tailwindcss": "4.3.1",
         "typescript": "5.9.3"
     },
     "engines": {
-        "node": "22.22.0",
-        "pnpm": "10.32.1"
+        "node": "22.22.3",
+        "pnpm": "11.6.0"
     },
     "name": "sharp-note",
-    "packageManager": "pnpm@10.32.1",
+    "packageManager": "pnpm@11.6.0",
     "private": true,
     "scripts": {
         "build": "next build",

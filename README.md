@@ -18,7 +18,7 @@
             1. [使用 Docker](#使用-docker)
             2. [使用 nvm](#使用-nvm)
             3. [使用 fnm](#使用-fnm)
-            4. [使用 Node.js v22.22.0](#使用-nodejs-v22220)
+            4. [使用 Node.js v22.22.3](#使用-nodejs-v22220)
         5. [许可证](#许可证)
         6. [联系我们](#联系我们)
     2. [English](#english)
@@ -61,14 +61,14 @@ docker run -d -p 3000:3000 sharp-note
 #### 使用 nvm
 
 ```bash
-# 安装 Node.js v22.22.0
-nvm install 22.22.0
+# 安装 Node.js v22.22.3
+nvm install 22.22.3
 
-# 切换到 Node.js v22.22.0
-nvm use 22.22.0
+# 切换到 Node.js v22.22.3
+nvm use 22.22.3
 
-# 全局安装 pnpm v10.32.1
-npm i -g pnpm@10.32.1
+# 全局安装 pnpm v11.6.0
+npm i -g pnpm@11.6.0
 
 # 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -89,14 +89,14 @@ pnpm start
 #### 使用 fnm
 
 ```bash
-# 安装 Node.js v22.22.0
-fnm install 22.22.0
+# 安装 Node.js v22.22.3
+fnm install 22.22.3
 
-# 切换到 Node.js v22.22.0
-fnm use 22.22.0
+# 切换到 Node.js v22.22.3
+fnm use 22.22.3
 
-# 全局安装 pnpm v10.32.1
-npm i -g pnpm@10.32.1
+# 全局安装 pnpm v11.6.0
+npm i -g pnpm@11.6.0
 
 # 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -114,11 +114,11 @@ pnpm build
 pnpm start
 ```
 
-#### 使用 Node.js v22.22.0
+#### 使用 Node.js v22.22.3
 
 ```bash
-# 全局安装 pnpm v10.32.1
-npm i -g pnpm@10.32.1
+# 全局安装 pnpm v11.6.0
+npm i -g pnpm@11.6.0
 
 # 克隆项目代码
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -165,7 +165,7 @@ English Version of the **README** Doc.
             1. [Use Docker](#use-docker)
             2. [Use nvm](#use-nvm)
             3. [Use fnm](#use-fnm)
-            4. [Use Node.js v22.22.0](#use-nodejs-v22220)
+            4. [Use Node.js v22.22.3](#use-nodejs-v22220)
         5. [License](#license)
         6. [Contact Us](#contact-us)
 
@@ -206,14 +206,14 @@ docker run -d -p 3000:3000 sharp-note
 #### Use nvm
 
 ```bash
-# Install Node.js v22.22.0
-nvm install 22.22.0
+# Install Node.js v22.22.3
+nvm install 22.22.3
 
-# Switch to Node.js v22.22.0
-nvm use 22.22.0
+# Switch to Node.js v22.22.3
+nvm use 22.22.3
 
-# Globally install pnpm v10.32.1
-npm i -g pnpm@10.32.1
+# Globally install pnpm v11.6.0
+npm i -g pnpm@11.6.0
 
 # Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -234,14 +234,14 @@ pnpm start
 #### Use fnm
 
 ```bash
-# Install Node.js v22.22.0
-fnm install 22.22.0
+# Install Node.js v22.22.3
+fnm install 22.22.3
 
-# Switch to Node.js v22.22.0
-fnm use 22.22.0
+# Switch to Node.js v22.22.3
+fnm use 22.22.3
 
-# Globally install pnpm v10.32.1
-npm i -g pnpm@10.32.1
+# Globally install pnpm v11.6.0
+npm i -g pnpm@11.6.0
 
 # Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git
@@ -259,11 +259,11 @@ pnpm build
 pnpm start
 ```
 
-#### Use Node.js v22.22.0
+#### Use Node.js v22.22.3
 
 ```bash
-# Globally install pnpm v10.32.1
-npm i -g pnpm@10.32.1
+# Globally install pnpm v11.6.0
+npm i -g pnpm@11.6.0
 
 # Clone the repo
 git clone https://github.com/Coder-Lucas/sharp-note.git

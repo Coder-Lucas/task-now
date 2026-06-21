@@ -1,8 +1,8 @@
 import Footer from "#/footer.tsx";
 import Header from "#/header.tsx";
 import "@styles/main.css";
-import "github-markdown-css/github-markdown.css";
 import { type Metadata, type Viewport } from "next";
+import Script from "next/script";
 
 type TRootLayoutProps = {
     readonly children: React.ReactNode;
@@ -86,9 +86,7 @@ const viewport: Viewport = {
 const RootLayout = ({ children }: TRootLayoutProps) => {
     return (
         <html className="bg-zinc-50 text-base scheme-light-dark dark:bg-zinc-950" dir="ltr" lang="zh-Hans-CN">
-            <head>
-                <meta charSet="UTF-8" />
-            </head>
+            <head>{process.env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID ? <Script id="com.microsoft.clarity" strategy="afterInteractive" type="text/javascript">{`(function(c,l,a,r,i,t,y){c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);})(window,document,"clarity","script","${process.env.NEXT_PUBLIC_MICROSOFT_CLARITY_ID}");`}</Script> : null}</head>
             <body className="mt-16 flow-root font-mono text-zinc-950 dark:text-zinc-50">
                 <Header />
                 {children}
